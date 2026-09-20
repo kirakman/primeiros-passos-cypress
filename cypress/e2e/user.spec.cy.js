@@ -8,10 +8,11 @@ describe('Orange HRM Tests', () => {
     loginButton: '[type="submit"]',
     wrongCredentialAlert: '[role="alert"]',
     dashboardGrid: '.orangehrm-dashboard-grid',
-    sectionTitle: '.oxd-topbar-header-breadcrumb-module'
+    sectionTitle: '.oxd-topbar-header-breadcrumb-module',
+    myInfoButton: '[href="/web/index.php/pim/viewMyDetails"]'
   }
 
-  it('Login - Success', () => {
+  it.only('User Info Update - Success', () => {
     cy.visit('/auth/login')
     cy.get(selectorLists.usernameField).type(userData.userSuccsess.username)
     cy.get(selectorLists.passwordField).type(userData.userSuccsess.password)
@@ -19,6 +20,7 @@ describe('Orange HRM Tests', () => {
     cy.location('pathname').should('equal', '/web/index.php/dashboard/index')
     cy.get(selectorLists.sectionTitle).should('contain', 'Dashboard')
     cy.get(selectorLists.dashboardGrid)
+    cy.get(selectorLists.myInfoButton).click()
   })
   it('Login - Fail', () => {
     cy.visit('/auth/login')
